@@ -1,20 +1,11 @@
 import express from 'express'
-import { PrismaClient } from '@prisma/client'
+const app = express()
 
 const router = express.Router()
 
-const prisma = new PrismaClient()
-
+app.use(express.json())
 router.get('/', async (req, res) => {
-  res.json("Hello World")
-})
-
-router.get('/products', async (req, res) => {
-  const products = await prisma.products.findMany({
-    skip: 0,
-    take: 10,
-  })
-  res.json(products)
+  res.json("You can access routes:/users /clients /products and /stock")
 })
 
 export default router;

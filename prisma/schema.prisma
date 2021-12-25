@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Users {
   id       Int    @id @default(autoincrement())
   email    String @unique
   password String
@@ -19,17 +19,17 @@ model Stock {
 }
 
 model Products {
-  id       Int     @id @default(autoincrement())
+  id       Int      @id @default(autoincrement())
   title    String
   content  String?
-  isSold   Boolean @default(false)
-  client   Client? @relation(fields: [clientId], references: [id])
+  isSold   Boolean  @default(false)
+  client   Clients? @relation(fields: [clientId], references: [id])
   clientId Int?
-  Stock    Stock?  @relation(fields: [stockId], references: [id])
+  Stock    Stock?   @relation(fields: [stockId], references: [id])
   stockId  Int?
 }
 
-model Client {
+model Clients {
   id    Int        @id @default(autoincrement())
   email String     @unique
   name  String
