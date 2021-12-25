@@ -1,6 +1,5 @@
 import express from 'express'
 const port = 3001
-
 const app = express()
 
 import routes from './routes/routes'
@@ -11,10 +10,10 @@ import usersRoutes from './routes/users.routes'
 
 app.use(express.json())
 app.use(routes)
-app.use(productsRoutes)
-app.use(clientsRoutes)
-app.use(usersRoutes)
-app.use(stockRoutes)
+app.use('/products', productsRoutes)
+app.use('/clients', clientsRoutes)
+app.use('/users', usersRoutes)
+app.use('/stock', stockRoutes)
 
 
 app.listen(port, () =>
