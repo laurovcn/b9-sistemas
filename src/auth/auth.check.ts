@@ -1,7 +1,9 @@
 import createError from 'http-errors'
-import { verifyAccessToken } from '../utils/jwt'
+import { verifyAccessToken } from './jwt'
 
-const auth = async (req: any, res: any, next: any) => {
+export default class AuthCheck {
+
+  static async auth (req: any, res: any, next: any) {
 
     if (!req.headers.authorization) {
         return next(new createError.Unauthorized('Access token is required'))
@@ -21,5 +23,4 @@ const auth = async (req: any, res: any, next: any) => {
     })
 
 }
-
-export default auth
+ }

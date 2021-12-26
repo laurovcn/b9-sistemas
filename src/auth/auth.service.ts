@@ -2,9 +2,10 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 import bcrypt from 'bcrypt'
 import createError from 'http-errors'
-import { signAccessToken }from '../utils/jwt'
+import { signAccessToken }from './jwt'
 
-class AuthService {
+export default class AuthService {
+  
   static async register(data: any) {
         const { email, password } = data;
         data.password = bcrypt.hashSync(data.password, 10);
@@ -32,11 +33,4 @@ class AuthService {
       const accessToken = await signAccessToken(users)
       return { ...users, accessToken }
   }
-  static async all() {
-      const allUsers = await prisma.users.findMany();
-      return allUsers;
-  }
 }
-
-
-module.exports = AuthService;

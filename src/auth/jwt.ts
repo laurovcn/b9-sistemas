@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken'
 import createError from 'http-errors'
 const accessTokenSecret = "ysecrestr"
 
-
 export function signAccessToken(payload: any){
     return new Promise((resolve, reject) => {
         jwt.sign({ payload }, accessTokenSecret, {
