@@ -3,7 +3,7 @@ import AuthCheck  from '../auth/auth.check'
 import AuthGuard from '../auth/auth.guard'
 import clientsRoutes from './clients.routes'
 import productsRoutes from './products.routes'
-import stockRoutes from './stock.routes'
+import transactionsRoutes from './transactions.routes'
 import usersRoutes from './users.routes'
 
 const app = express()
@@ -25,6 +25,6 @@ router.post('/login', authGuard.login, async (req, res) => {
 router.use('/products', authCheck.auth, productsRoutes)
 router.use('/clients', authCheck.auth, clientsRoutes)
 router.use('/users', authCheck.auth, usersRoutes)
-router.use('/stock', authCheck.auth, stockRoutes)
+router.use('transactions', authCheck.auth, transactionsRoutes)
 
 export default router;

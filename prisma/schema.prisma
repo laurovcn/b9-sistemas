@@ -13,25 +13,28 @@ model Users {
   password String
 }
 
-model Stock {
-  id    Int        @id @default(autoincrement())
-  posts Products[]
+model Clients {
+  id       Int        @id @default(autoincrement())
+  email    String     @unique
+  name     String
+  products Products[]
+
+  ProductsOnClients ProductsOnClients[]
 }
 
 model Products {
-  id       Int      @id @default(autoincrement())
-  title    String
-  content  String?
-  isSold   Boolean  @default(false)
-  client   Clients? @relation(fields: [clientId], references: [id])
-  clientId Int?
-  Stock    Stock?   @relation(fields: [stockId], references: [id])
-  stockId  Int?
+  id                Int                 @id @default(autoincrement())
+  title             String
+  content           String?
+  clients           Clients[]
+  ProductsOnClients ProductsOnClients[]
 }
 
-model Clients {
-  id    Int        @id @default(autoincrement())
-  email String     @unique
-  name  String
-  posts Products[]
+model ProductsOnClients {
+  products   Products @relation(fields: [productsId], references: [id])
+  productsId Int // relation scalar field (used in the `@relation` attribute above)
+  clients    Clients  @relation(fields: [clientsId], references: [id])
+  clientsId  Int // relation scalar field (used in the `@relation` attribute above)
+
+  @@id([productsId, clientsId])
 }
