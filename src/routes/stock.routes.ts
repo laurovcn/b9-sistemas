@@ -25,17 +25,12 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   const { id } = req.params
-
-  try {
-    const { data } = req.body
-    const updatedPost = await prisma.stock.update({
-      where: { id: Number(id) }, data
-     
-    })
-    res.json(updatedPost)
-  } catch (error) {
-    res.json({ error: `Post with ID ${id} does not exist in the database` })
-  }
+  const data = req.body
+  const post = await prisma.stock.update({
+    where: { id: Number(id) },
+    data
+  })
+  res.json(post)
 })
 
 router.delete('/:id', async (req, res) => {

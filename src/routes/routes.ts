@@ -14,8 +14,8 @@ const authCheck = AuthCheck
 
 app.use(express.json())
 
-router.get('/login', async (req, res) => {
-  res.json('Login Router')
+router.get('/', async (req, res) => {
+  res.json('Welcome to B9 System Project')
 })
 
 router.post('/login', authGuard.login, async (req, res) => {

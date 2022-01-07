@@ -1,5 +1,6 @@
 import express from 'express'
 import { PrismaClient } from '@prisma/client'
+import bcrypt from 'bcrypt'
 
 const router = express.Router()
 
@@ -16,25 +17,27 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const data = req.body
+
+  data.password = await bcrypt.hash(data.password, 10);
+
   const result = await prisma.users.create({
-    data,
+    data: data
+    
   })
   res.json(result)
 })
 
 router.put('/:id', async (req, res) => {
   const { id } = req.params
+  const data = req.body
 
-  try {
-    const { data } = req.body
-    const updatedPost = await prisma.users.update({
-      where: { id: Number(id) }, data
-     
-    })
-    res.json(updatedPost)
-  } catch (error) {
-    res.json({ error: `Post with ID ${id} does not exist in the database` })
-  }
+  data.password = await bcrypt.hash(data.password, 10);
+  
+  const post = await prisma.users.update({
+    where: { id: Number(id) },
+    data
+  })
+  res.json(post)
 })
 
 router.delete('/:id', async (req, res) => {
