@@ -25,6 +25,6 @@ router.post('/login', authGuard.login, async (req, res) => {
 router.use('/products', authCheck.auth, productsRoutes)
 router.use('/clients', authCheck.auth, clientsRoutes)
 router.use('/users', authCheck.auth, usersRoutes)
-router.use('transactions', authCheck.auth, transactionsRoutes)
+router.use('/transactions', authCheck.auth, transactionsRoutes)
 
 export default router;

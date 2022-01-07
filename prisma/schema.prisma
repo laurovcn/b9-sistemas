@@ -19,18 +19,18 @@ model Clients {
   name     String
   products Products[]
 
-  ProductsOnClients ProductsOnClients[]
+  transactions Transactions[]
 }
 
 model Products {
-  id                Int                 @id @default(autoincrement())
-  title             String
-  content           String?
-  clients           Clients[]
-  ProductsOnClients ProductsOnClients[]
+  id           Int            @id @default(autoincrement())
+  title        String
+  content      String?
+  clients      Clients[]
+  transactions Transactions[]
 }
 
-model ProductsOnClients {
+model Transactions {
   products   Products @relation(fields: [productsId], references: [id])
   productsId Int // relation scalar field (used in the `@relation` attribute above)
   clients    Clients  @relation(fields: [clientsId], references: [id])
