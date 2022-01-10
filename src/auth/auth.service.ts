@@ -7,7 +7,6 @@ import { signAccessToken }from './jwt'
 export default class AuthService {
   
   static async register(data: any) {
-        const { email, password } = data;
         data.password = bcrypt.hashSync(data.password, 10);
         let user = prisma.users.create({
             data

@@ -33,6 +33,16 @@ router.put('/:id', async (req, res) => {
   res.json(post)
 })
 
+router.put('/quantity/:id', async (req, res) => {
+  const { id } = req.params
+  const data = req.body
+  const post = await prisma.products.update({
+    where: { id: Number(id) },
+    data: { quantity: data.quantity } 
+  })
+  res.json(post)
+})
+
 router.delete('/:id', async (req, res) => {
   const { id } = req.params
   const post = await prisma.products.delete({
