@@ -16,11 +16,29 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  const data = req.body
-  const result = await prisma.transactions.create({
-    data,
+
+  const id = req.body.productId
+  
+  const check = await prisma.products.findUnique({
+    where: { id },
   })
-  res.json(result)
+
+  if (check && check.quantity > 0) {
+
+    const data = req.body
+    const result = await prisma.transactions.create({
+      data,
+    })
+
+     await prisma.products.update({
+      where: { id },
+      data: { quantity: check.quantity - 1 }
+    }) 
+
+  return res.json(result) 
+  } 
+
+  return res.json({message: 'Product not available'})
 })
 
 export default router;
