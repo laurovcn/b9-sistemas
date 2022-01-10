@@ -24,7 +24,7 @@ model Clients {
 model Products {
   id           Int            @id @default(autoincrement())
   title        String
-  content      String?
+  quantity     Int            @default(100)
   clients      Clients[]
   transactions Transactions[]
 }
