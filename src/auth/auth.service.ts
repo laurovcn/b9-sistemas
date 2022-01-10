@@ -2,11 +2,12 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 import bcrypt from 'bcrypt'
 import createError from 'http-errors'
+import UsersInterface from '../interfaces/users.dto';
 import { signAccessToken }from './jwt'
 
 export default class AuthService {
   
-  static async register(data: any) {
+  static async register(data: UsersInterface) {
         data.password = bcrypt.hashSync(data.password, 10);
         let user = prisma.users.create({
             data
@@ -16,7 +17,7 @@ export default class AuthService {
         return data;
     }
 
-    static async login(data: any) {
+    static async login(data: UsersInterface) {
       const { email, password } = data;
       const users = await prisma.users.findUnique({
           where: {

@@ -1,6 +1,7 @@
 import express from 'express'
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcrypt'
+import UsersController from '../controllers/Users/users.controller'
 
 const router = express.Router()
 
@@ -15,17 +16,7 @@ router.get('/', async (req, res) => {
   res.json(users)
 })
 
-router.post('/', async (req, res) => {
-  const data = req.body
-
-  data.password = await bcrypt.hash(data.password, 10);
-
-  const result = await prisma.users.create({
-    data: data
-    
-  })
-  res.json(result)
-})
+router.post('/', UsersController.create)
 
 router.put('/:id', async (req, res) => {
   const { id } = req.params
