@@ -14,26 +14,26 @@ model Users {
 }
 
 model Clients {
-  id       Int            @id @default(autoincrement())
-  email    String         @unique
-  name     String
-  products Transactions[]
+  id           Int            @id @default(autoincrement())
+  email        String
+  name         String
+  products     Products[]
+  transactions Transactions[]
 }
 
 model Products {
-  id      Int            @id @default(autoincrement())
-  title   String
-  content String?
-  clients Transactions[]
+  id           Int            @id @default(autoincrement())
+  title        String
+  content      String?
+  clients      Clients[]
+  transactions Transactions[]
 }
 
 model Transactions {
-  clientsId  Int      @map("clientsId")
-  productsId Int      @map("productsId")
   products   Products @relation(fields: [productsId], references: [id])
+  productsId Int
   clients    Clients  @relation(fields: [clientsId], references: [id])
-
+  clientsId  Int
 
   @@id([productsId, clientsId])
-  @@map("transactions")
 }
