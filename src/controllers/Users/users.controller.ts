@@ -3,17 +3,16 @@ import bcrypt from 'bcrypt'
 import UsersInterface from '../../interfaces/users.dto';
 
 const prisma = new PrismaClient()
-
 export default class UsersController {
-  static async create (user: UsersInterface): Promise<UsersInterface> { 
-    const data = user
+  static async create (req: any): Promise<UsersInterface> { 
 
-    data.password = await bcrypt.hash(data.password, 10);
+   const data: UsersInterface = req
+    
+   data.password = await bcrypt.hash(data.password, 10);
 
-    const result = await prisma.users.create({
-      data: data
-      
+    await prisma.users.create({
+       data 
     })
-   return result
+    return data
   } 
 }

@@ -1,7 +1,7 @@
 
 export default interface UsersInterface {
     email: string,
-    password: string,
+    password: string ,
     accessToken?: unknown
 }
 

@@ -18,9 +18,7 @@ router.get('/', async (req, res) => {
   res.json('Welcome to B9 System Project')
 })
 
-router.post('/login', authGuard.login, async (req, res) => {
-  res.json('Login Router')
-})
+router.post('/login', authGuard.login)
 
 router.use('/products', authCheck.auth, productsRoutes)
 router.use('/clients', authCheck.auth, clientsRoutes)

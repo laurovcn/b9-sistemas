@@ -16,7 +16,9 @@ router.get('/', async (req, res) => {
   res.json(users)
 })
 
-router.post('/', UsersController.create)
+router.post('/', async (req, res) => {
+ return res.json( await UsersController.create(req.body) ) 
+})
 
 router.put('/:id', async (req, res) => {
   const { id } = req.params
