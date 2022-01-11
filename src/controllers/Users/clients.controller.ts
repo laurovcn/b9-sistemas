@@ -1,15 +1,15 @@
 import { PrismaClient } from '@prisma/client'
-import bcrypt from 'bcrypt'
-import UsersInterface from '../../interfaces/users.interface';
+import ClientsInterface from '../../interfaces/clients.interface'
 
 const prisma = new PrismaClient()
-export default class UsersController {
+
+export default class ClientsController {
 
   static async findAll () {
 
     try {
 
-      return await prisma.users.findMany()
+      return await prisma.clients.findMany()
 
     } catch (error) {
 
@@ -17,16 +17,13 @@ export default class UsersController {
     }
   }
 
-
-  static async create (req: UsersInterface) { 
+  static async create (req: ClientsInterface) { 
 
     const data = req
     
     try {  
-
-      data.password = await bcrypt.hash(req.password, 10);
       
-      return await prisma.users.create({
+      return await prisma.clients.create({
         data
       })  
 
@@ -36,15 +33,13 @@ export default class UsersController {
   }  
 }
 
-  static async update (id: string, request: UsersInterface) {
+  static async update (id: string, request: ClientsInterface) {
 
     try {
         
-        const data = request
-
-        data.password = await bcrypt.hash(request.password, 10);
+        const data = request 
   
-        return await prisma.users.update({
+        return await prisma.clients.update({
           where: {
             id: Number(id),
           },
@@ -61,7 +56,7 @@ export default class UsersController {
 
     try {
 
-      await prisma.users.delete({
+      await prisma.clients.delete({
         where: {
           id: Number(id),
         },
