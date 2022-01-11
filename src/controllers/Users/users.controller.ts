@@ -4,35 +4,71 @@ import UsersInterface from '../../interfaces/users.interface';
 
 const prisma = new PrismaClient()
 export default class UsersController {
-  static async create (req: UsersInterface): Promise<UsersInterface> { 
 
-   const data = req
+  static async create (req: UsersInterface) { 
+
+    const data = req
     
-   data.password = await bcrypt.hash(req.password, 10);
+    try {  
 
-    await prisma.users.create({
-       data 
-    })
-    return data
-  } 
+      data.password = await bcrypt.hash(req.password, 10);
+      
+      return await prisma.users.create({
+        data
+      })  
 
-  static async findAll (): Promise<UsersInterface[]> {
-    const users = await prisma.users.findMany({
-      skip: 0,
-      take: 10,
-    })
-    return users
+    } catch (error) {  
+
+     return error
+  }  
+}
+
+  static async findAll () {
+
+    try {
+
+      return await prisma.users.findMany()
+
+    } catch (error) {
+
+      return error
+    }
   }
 
-  static async update (id: string, request: UsersInterface): Promise<UsersInterface> {
+  static async update (id: string, request: UsersInterface) {
 
-    const data = request
+    try {
+        
+        const data = request
 
-    data.password = await bcrypt.hash(data.password, 10);
-    const user = await prisma.users.update({
-      where:  { id: Number(id) },
-      data
-    })
-    return user
+        data.password = await bcrypt.hash(request.password, 10);
+  
+        return await prisma.users.update({
+          where: {
+            id: Number(id),
+          },
+          data,
+        })  
+
+    } catch (error) {
+
+      return error
+    }
+  }
+
+  static async delete (id: string) {
+
+    try {
+
+      await prisma.users.delete({
+        where: {
+          id: Number(id),
+        },
+      })
+
+    } catch (error) {
+
+      return error
+    }
   }
 }
