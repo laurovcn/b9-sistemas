@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcrypt'
-import UsersInterface from '../../interfaces/users.interface';
+import UsersInterface from '../../interfaces/users/users.interface';
 
 const prisma = new PrismaClient()
 export default class UsersController {

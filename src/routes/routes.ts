@@ -1,9 +1,9 @@
 import express from 'express'
 import AuthCheck  from '../auth/auth.check'
 import AuthGuard from '../auth/auth.guard'
-import clientsRoutes from './clients.routes'
-import productsRoutes from './products.routes'
-import usersRoutes from './users.routes'
+import clientsRoutes from './clients/clients.routes'
+import productsRoutes from './products/products.routes'
+import usersRoutes from './users/users.routes'
 import transactionsRoutes from './transactions.routes'
 
 const app = express()
