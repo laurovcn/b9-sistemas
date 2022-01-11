@@ -15,4 +15,12 @@ export default class UsersController {
     })
     return data
   } 
+
+  static async findAll (): Promise<UsersInterface[]> {
+    const users = await prisma.users.findMany({
+      skip: 0,
+      take: 10,
+    })
+    return users
+  }
 }

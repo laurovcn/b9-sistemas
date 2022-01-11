@@ -9,11 +9,7 @@ const prisma = new PrismaClient()
 
 router.use(express.json())
 router.get('/', async (req, res) => {
-  const users = await prisma.users.findMany({
-    skip: 0,
-    take: 10,
-  })
-  res.json(users)
+   return res.json( await UsersController.findAll() )
 })
 
 router.post('/', async (req, res) => {
