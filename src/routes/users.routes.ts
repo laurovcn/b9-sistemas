@@ -17,17 +17,8 @@ router.post('/', async (req, res) => {
  return res.json( await UsersController.create(req.body) ) 
 })
 
-router.put('/:id', async (req, res) => {
-  const { id } = req.params
-  const data = req.body
-
-  data.password = await bcrypt.hash(data.password, 10);
-  
-  const post = await prisma.users.update({
-    where: { id: Number(id) },
-    data
-  })
-  res.json(post)
+router.put('/:id', async (req, res) => { 
+  return res.json( await UsersController.update(req.params.id, req.body) )
 })
 
 router.delete('/:id', async (req, res) => {

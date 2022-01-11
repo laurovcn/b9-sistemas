@@ -23,4 +23,16 @@ export default class UsersController {
     })
     return users
   }
+
+  static async update (id: string, request: UsersInterface): Promise<UsersInterface> {
+
+    const data = request
+
+    data.password = await bcrypt.hash(data.password, 10);
+    const user = await prisma.users.update({
+      where:  { id: Number(id) },
+      data
+    })
+    return user
+  }
 }
