@@ -4,7 +4,7 @@ import AuthGuard from '../auth/auth.guard'
 import clientsRoutes from './clients/clients.routes'
 import productsRoutes from './products/products.routes'
 import usersRoutes from './users/users.routes'
-import transactionsRoutes from './transactions.routes'
+import transactionsRoutes from './transactions/transactions.routes'
 
 const app = express()
 const router = express.Router()

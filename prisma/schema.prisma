@@ -30,10 +30,9 @@ model Products {
 }
 
 model Transactions {
+  id         Int      @id @default(autoincrement())
   products   Products @relation(fields: [productsId], references: [id])
   productsId Int
   clients    Clients  @relation(fields: [clientsId], references: [id])
   clientsId  Int
-
-  @@id([productsId, clientsId])
 }
