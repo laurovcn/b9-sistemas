@@ -4,9 +4,9 @@ import UsersInterface from '../../interfaces/users.dto';
 
 const prisma = new PrismaClient()
 export default class UsersController {
-  static async create (req: any): Promise<UsersInterface> { 
+  static async create (req: UsersInterface): Promise<UsersInterface> { 
 
-   const data: UsersInterface = req
+   const data = req
     
    data.password = await bcrypt.hash(data.password, 10);
 
