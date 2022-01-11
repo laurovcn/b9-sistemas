@@ -8,6 +8,7 @@ const router = express.Router()
 const prisma = new PrismaClient()
 
 router.use(express.json())
+
 router.get('/', async (req, res) => {
    return res.json( await UsersController.findAll() )
 })

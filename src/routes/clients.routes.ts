@@ -6,6 +6,7 @@ const router = express.Router()
 const prisma = new PrismaClient()
 
 router.use(express.json())
+
 router.get('/', async (req, res) => {
   const clients = await prisma.clients.findMany({
     skip: 0,

@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcrypt'
-import UsersInterface from '../../interfaces/users.dto';
+import UsersInterface from '../../interfaces/users.interface';
 
 const prisma = new PrismaClient()
 export default class UsersController {
@@ -8,7 +8,7 @@ export default class UsersController {
 
    const data = req
     
-   data.password = await bcrypt.hash(data.password, 10);
+   data.password = await bcrypt.hash(req.password, 10);
 
     await prisma.users.create({
        data 

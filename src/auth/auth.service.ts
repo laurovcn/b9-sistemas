@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 import bcrypt from 'bcrypt'
 import createError from 'http-errors'
-import UsersInterface from '../interfaces/users.dto';
+import UsersInterface from '../interfaces/users.interface';
 import { signAccessToken }from './jwt'
 
 export default class AuthService {
