@@ -1,56 +1,24 @@
 import express from 'express'
-import { PrismaClient } from '@prisma/client'
+import ProductsController from '../controllers/products/products.controller'
 
 const router = express.Router()
-
-const prisma = new PrismaClient()
 
 router.use(express.json())
 
 router.get('/', async (req, res) => {
-  const products = await prisma.products.findMany({
-    skip: 0,
-    take: 10,
-  })
-  res.json(products)
+  return res.json( await ProductsController.findAll() )
 })
 
 router.post('/', async (req, res) => {
-  const data = req.body
-  const result = await prisma.products.create({
-    data,
+  return res.json( await ProductsController.create(req.body) ) 
   })
-  res.json(result)
-})
 
-router.put('/:id', async (req, res) => {
-  const { id } = req.params
-  const data = req.body
-  const post = await prisma.products.update({
-    where: { id: Number(id) },
-    data
+router.put('/:id', async (req, res) => { 
+  return res.json( await ProductsController.update(req.params.id, req.body) )
   })
-  res.json(post)
-})
-
-router.put('/quantity/:id', async (req, res) => {
-  const { id } = req.params
-  const data = req.body
-  const post = await prisma.products.update({
-    where: { id: Number(id) },
-    data: { quantity: data.quantity } 
-  })
-  res.json(post)
-})
 
 router.delete('/:id', async (req, res) => {
-  const { id } = req.params
-  const post = await prisma.products.delete({
-    where: {
-      id: Number(id),
-    },
+  return res.json( await ProductsController.delete(req.params.id) )
   })
-  res.json(post)
-})
 
 export default router;
