@@ -1,16 +1,14 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
 import TransactionsController from '../../controllers/transactions/transactions.controller'
 
-const router = express.Router()
+export const transactionsRouter = express.Router()
 
-router.use(express.json())
+transactionsRouter.use(express.json())
 
-router.get('/', async (req, res) => {
+transactionsRouter.get('/', async (req: Request, res: Response)=> {
   return res.json( await TransactionsController.findAll() )
 })
 
-router.post('/', async (req, res) => {
+transactionsRouter.post('/', async (req: Request, res: Response)=> {
   return res.json( await TransactionsController.create(req.body) ) 
   })
-
-export default router;

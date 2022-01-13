@@ -1,24 +1,22 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
 import ProductsController from '../../controllers/products/products.controller'
 
-const router = express.Router()
+export const productsRouter = express.Router()
 
-router.use(express.json())
+productsRouter.use(express.json())
 
-router.get('/', async (req, res) => {
+productsRouter.get('/', async (req: Request, res: Response) => {
   return res.json( await ProductsController.findAll() )
 })
 
-router.post('/', async (req, res) => {
+productsRouter.post('/', async (req, res) => {
   return res.json( await ProductsController.create(req.body) ) 
   })
 
-router.put('/:id', async (req, res) => { 
+productsRouter.put('/:id', async (req, res) => { 
   return res.json( await ProductsController.update(req.params.id, req.body) )
   })
 
-router.delete('/:id', async (req, res) => {
+productsRouter.delete('/:id', async (req, res) => {
   return res.json( await ProductsController.delete(req.params.id) )
   })
-
-export default router;

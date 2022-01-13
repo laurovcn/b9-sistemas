@@ -1,24 +1,22 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
 import ClientsController from '../../controllers/clients/clients.controller'
 
-const router = express.Router()
+export const clientsRouter = express.Router()
 
-router.use(express.json())
+clientsRouter.use(express.json())
 
-router.get('/', async (req, res) => {
+clientsRouter.get('/', async (req: Request, res: Response) => {
   return res.json( await ClientsController.findAll() )
 })
 
-router.post('/', async (req, res) => {
+clientsRouter.post('/', async (req: Request, res: Response) => {
 return res.json( await ClientsController.create(req.body) ) 
 })
 
-router.put('/:id', async (req, res) => { 
+clientsRouter.put('/:id', async (req: Request, res: Response) => { 
  return res.json( await ClientsController.update(req.params.id, req.body) )
 })
 
-router.delete('/:id', async (req, res) => {
+clientsRouter.delete('/:id', async (req: Request, res: Response) => {
  return res.json( await ClientsController.delete(req.params.id) )
 })
-
-export default router;
