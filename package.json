@@ -7,8 +7,6 @@
   },
   "dependencies": {
     "@prisma/client": "3.7.0",
-    "@types/mongodb": "^4.0.7",
-    "@types/passport": "^1.0.7",
     "bcrypt": "^5.0.1",
     "express": "4.17.2",
     "http-errors": "^2.0.0",
