@@ -4,7 +4,7 @@ export const collections: { init?: mongoDB.Collection } = {}
 
 export async function connectToDatabase () {
 
-  const uri = 'mongodb+srv://dev:dev@cluster0.to5qx.mongodb.net/b9system?retryWrites=true&w=majority'
+  const uri = 'mongodb+srv://b9system:b9system@cluster0.to5qx.mongodb.net/b9system?retryWrites=true&w=majority'
   const dbName = 'b9system'
   const dbCollection = 'init'
 
