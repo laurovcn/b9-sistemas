@@ -1,6 +1,8 @@
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcrypt'
+import LogInterface from '../../interfaces/log/log.interface';
 import UsersInterface from '../../interfaces/users/users.interface';
+import { LogService } from '../../mongodb/mongo.service'
 
 const prisma = new PrismaClient()
 export default class UsersController {
@@ -9,11 +11,17 @@ export default class UsersController {
 
     try {
 
+      const data = {
+        description: 'Cannot find users'
+      } as LogInterface
+
+      await LogService.logCreate(data)
+
       return await prisma.users.findMany()
 
-    } catch (error) {
+    } catch (error) {     
 
-      return error
+      return await error
     }
   }
 

@@ -1,6 +1,6 @@
 import express from 'express'
 import { router } from './routes/routes'
-import { connectToDatabase } from './mongodb/mongo.connection'
+import { connectToDatabase } from './mongodb/mongo.service'
 
 const port = 3001
 const app = express()
