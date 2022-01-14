@@ -34,7 +34,7 @@ import { LogService } from '../../services/log.service'
       data
     })  
 
-    return response.json({ message: `Product registers ${data}` })
+    return response.json({ message: 'Product register' })
 
   } catch (error) { 
 

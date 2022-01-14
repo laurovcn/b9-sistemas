@@ -47,7 +47,7 @@ const prisma = new PrismaClient()
           data: { quantity: check.quantity - 1 }
         }) 
 
-      return response.json({ message: `Transaction Complete ${data} `})
+      return response.json({ message: 'Transaction Complete'})
 
       } 
 
