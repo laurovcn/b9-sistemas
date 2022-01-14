@@ -4,103 +4,100 @@ import LogInterface from '../../interfaces/log/log.interface'
 import ProductsInterface from '../../interfaces/products/products.interface'
 import { LogService } from '../../services/log.service'
 
-const prisma = new PrismaClient()
+  const prisma = new PrismaClient()
 
-export default class ProductsController {
+  export const findAll = async () => {
 
-   async findAll () {
+  try {
 
-    try {
+    return await prisma.products.findMany()
 
-      return await prisma.products.findMany()
+  } catch (error) {
 
-    } catch (error) {
+    const data = {
+      description: 'Cannot find products'
+    } as LogInterface
 
-      const data = {
-        description: 'Cannot find products'
-      } as LogInterface
+    await LogService(data)
 
-      await LogService(data)
-
-      return error
-    }
+    return error
   }
-
-   async create (request: Request, response: Response) { 
-
-    const data: ProductsInterface = request.body
-    
-    try {  
-      
-       await prisma.products.create({
-        data
-      })  
-
-      return response.json({ message: `Product registers ${data}` })
-
-    } catch (error) { 
-
-      const data = {
-        description: 'Cannot create products'
-      } as LogInterface
-
-      await LogService(data) 
-
-     return error
-  }  
 }
 
-   async update (request: Request, response: Response) {
+  export const create = async (request: Request, response: Response) => { 
 
-    try {
-        
-        const id: string = request.params.id
-        const data: ProductsInterface = request.body 
+  const data: ProductsInterface = request.body
   
-        await prisma.products.update({
-          where: {
-            id: Number(id),
-          },
-          data,
-        })  
+  try {  
+    
+      await prisma.products.create({
+      data
+    })  
 
-        response.json({ message: `Product with id: ${id} updated`})
+    return response.json({ message: `Product registers ${data}` })
 
-    } catch (error) {
+  } catch (error) { 
 
-      const data = {
-        description: 'Cannot update products'
-      } as LogInterface
+    const data = {
+      description: 'Cannot create products'
+    } as LogInterface
 
-      await LogService(data)
+    await LogService(data) 
 
-      return error
-    }
-  }
+    return error
+}  
+}
 
-   async delete (request: Request, response: Response) {
+  export const update = async (request: Request, response: Response) => {
 
-    const id: string = request.params.id
+  try {
+      
+      const id: string = request.params.id
+      const data: ProductsInterface = request.body 
 
-    try {
-
-      await prisma.products.delete({
+      await prisma.products.update({
         where: {
           id: Number(id),
         },
-      })
+        data,
+      })  
 
-      return response.json({ message: `Product with id: ${id} deleted`})
+      response.json({ message: `Product with id: ${id} updated`})
 
-    } catch (error) {
+  } catch (error) {
 
-      const data = {
-        description: 'Cannot delete products'
-      } as LogInterface
+    const data = {
+      description: 'Cannot update products'
+    } as LogInterface
 
-      await LogService(data)
+    await LogService(data)
 
-      return error
-    }
+    return error
+  }
+}
+
+  export const remove = async (request: Request, response: Response) => {
+
+  const id: string = request.params.id
+
+  try {
+
+    await prisma.products.delete({
+      where: {
+        id: Number(id),
+      },
+    })
+
+    return response.json({ message: `Product with id: ${id} deleted`})
+
+  } catch (error) {
+
+    const data = {
+      description: 'Cannot delete products'
+    } as LogInterface
+
+    await LogService(data)
+
+    return error
   }
 }

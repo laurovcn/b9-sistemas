@@ -1,16 +1,14 @@
 import express from 'express'
-import ProductsController from '../../controllers/products/products.controller'
+import * as ProductsController from '../../controllers/products/products.controller'
 
 export const productsRouter = express.Router()
 
 productsRouter.use(express.json())
 
-const controller = new ProductsController()
+productsRouter.get('/', ProductsController.findAll)
 
-productsRouter.get('/', controller.findAll.bind(controller))
+productsRouter.post('/', ProductsController.create)
 
-productsRouter.post('/', controller.create.bind(controller))
+productsRouter.put('/:id', ProductsController.update)
 
-productsRouter.put('/:id', controller.update.bind(controller))
-
-productsRouter.delete('/:id', controller.delete.bind(controller))
+productsRouter.delete('/:id', ProductsController.remove)

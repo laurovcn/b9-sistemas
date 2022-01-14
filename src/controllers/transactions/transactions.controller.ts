@@ -4,11 +4,9 @@ import LogInterface from '../../interfaces/log/log.interface'
 import TransactionsInterface from '../../interfaces/transactions/transactions'
 import { LogService } from '../../services/log.service'
 
-const prisma = new PrismaClient()
+  const prisma = new PrismaClient()
 
-export default class TransactionsController {
-
-   async findAll () {
+  export const findAll = async () => {
 
     try {
 
@@ -26,7 +24,7 @@ export default class TransactionsController {
     }
   }
 
-   async create (request: Request, response: Response) {     
+   export const create = async (request: Request, response: Response) => {     
     
     try {  
 
@@ -66,4 +64,3 @@ export default class TransactionsController {
      return error
     }  
   }
-}
