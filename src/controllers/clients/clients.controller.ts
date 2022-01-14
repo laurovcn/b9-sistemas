@@ -6,11 +6,11 @@ import { LogService } from '../../services/log.service'
 
   const prisma = new PrismaClient()
 
-  export const findAll = () => {
+  export const findAll = async (request: Request, response: Response) => {
 
   try {
 
-    return response.json(prisma.clients.findMany()) 
+    return response.json(await prisma.clients.findMany()) 
 
   } catch (error) {
 
@@ -18,7 +18,7 @@ import { LogService } from '../../services/log.service'
       description: 'Cannot find clients'
     } as LogInterface
 
-    LogService(data)
+    await LogService(data)
 
     return error
   }
@@ -34,7 +34,7 @@ import { LogService } from '../../services/log.service'
       data
     })  
 
-    response.json({ message: `Client ${data} created` })
+    return response.json({ message: `Client created` })
 
   } catch (error) {  
 

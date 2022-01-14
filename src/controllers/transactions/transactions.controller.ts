@@ -6,11 +6,11 @@ import { LogService } from '../../services/log.service'
 
 const prisma = new PrismaClient()
 
-  export const findAll = (request: Request, response: Response) => {
+  export const findAll = async (request: Request, response: Response) => {
 
     try {
 
-      return response.json(prisma.transactions.findMany()) 
+      return response.json(await prisma.transactions.findMany()) 
 
     } catch (error) {
 
@@ -18,7 +18,7 @@ const prisma = new PrismaClient()
         description: 'Cannot find transactions'
       } as LogInterface
 
-      LogService(data)
+      await LogService(data)
 
       return error
     }
