@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcrypt'
+import { Request, Response } from 'express'
 import LogInterface from '../../interfaces/log/log.interface'
 import UsersInterface from '../../interfaces/users/users.interface'
 import { LogService } from '../../services/log.service'
@@ -7,7 +8,7 @@ import { LogService } from '../../services/log.service'
 const prisma = new PrismaClient()
 export default class UsersController {
 
-  static async findAll () {
+   async findAll (request: Request, response: Response) {
 
     try {     
 
@@ -26,17 +27,19 @@ export default class UsersController {
   }
 
 
-  static async create (req: UsersInterface) { 
+   async create (request: Request, response: Response) { 
 
-    const data = req
+    const data: UsersInterface = request.body
     
     try {  
 
-      data.password = await bcrypt.hash(req.password, 10)
+      data.password = await bcrypt.hash(data.password, 10)
       
-      return await prisma.users.create({
+      await prisma.users.create({
         data
       })  
+
+      return response.json({Message: `Created user ${data}`})
 
     } catch (error) {  
 
@@ -50,20 +53,22 @@ export default class UsersController {
   }  
 }
 
-  static async update (id: string, request: UsersInterface) {
+   async update (request: Request, response: Response) {
 
     try {
         
-        const data = request
+        const data: UsersInterface = request.body
 
-        data.password = await bcrypt.hash(request.password, 10)
+        data.password = await bcrypt.hash(data.password, 10)
   
-        return await prisma.users.update({
+        await prisma.users.update({
           where: {
-            id: Number(id),
+            id: Number(data.id),
           },
           data,
         })  
+
+      return response.json({Message: `Update user with id: ${data.id}`})
 
     } catch (error) {
 
@@ -77,15 +82,19 @@ export default class UsersController {
     }
   }
 
-  static async delete (id: string) {
+   async delete (request: Request, response: Response) {
+
+    const data: UsersInterface = request.body.id
 
     try {
 
       await prisma.users.delete({
         where: {
-          id: Number(id),
+          id: Number(data.id),
         },
       })
+
+     return response.json({Message: `User with id: ${data.id} deleted`})
 
     } catch (error) {
 

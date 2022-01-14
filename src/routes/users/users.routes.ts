@@ -5,19 +5,13 @@ export const usersRouter = express.Router()
 
 usersRouter.use(express.json())
 
-usersRouter.get('/', async (req: Request, res: Response) => {
-   return res.json( await UsersController.findAll() )
-})
+const controller = new UsersController()
 
-usersRouter.post('/', async (req: Request, res: Response) => {
- return res.json( await UsersController.create(req.body) ) 
-})
+usersRouter.get('/',  controller.findAll.bind(controller))
 
-usersRouter.put('/:id', async (req: Request, res: Response) => { 
-  return res.json( await UsersController.update(req.params.id, req.body) )
-})
+usersRouter.post('/',  controller.create.bind(controller))
 
-usersRouter.delete('/:id', async (req: Request, res: Response) => {
-  return res.json( await UsersController.delete(req.params.id) )
-})
+usersRouter.put('/:id',  controller.update.bind(controller))
+
+usersRouter.delete('/:id',  controller.delete.bind(controller))
 
