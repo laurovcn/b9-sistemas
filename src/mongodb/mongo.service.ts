@@ -27,7 +27,8 @@ export async function connectToDatabase () {
     static async logCreate (data: LogInterface) { 
       console.log(data) 
       await connectToDatabase ().then( async () => {
-        await collections.b9system?.insertOne(data)
+      const result =  await collections.b9system?.insertOne(data)
+      console.log(result)
       })       
     }
   }
