@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import { Request, Response } from 'express'
 import LogInterface from '../../interfaces/log/log.interface'
 import ProductsInterface from '../../interfaces/products/products.interface'
 import { LogService } from '../../services/log.service'
@@ -7,7 +8,7 @@ const prisma = new PrismaClient()
 
 export default class ProductsController {
 
-  static async findAll () {
+   async findAll () {
 
     try {
 
@@ -26,15 +27,17 @@ export default class ProductsController {
     }
   }
 
-  static async create (req: ProductsInterface) { 
+   async create (request: Request, response: Response) { 
 
-    const data = req
+    const data: ProductsInterface = request.body
     
     try {  
       
-      return await prisma.products.create({
+       await prisma.products.create({
         data
       })  
+
+      return response.json({ message: `Product registers ${data}` })
 
     } catch (error) { 
 
@@ -48,18 +51,20 @@ export default class ProductsController {
   }  
 }
 
-  static async update (id: string, request: ProductsInterface) {
+   async update (request: Request, response: Response) {
 
     try {
         
-        const data = request 
+        const data: ProductsInterface = request.body 
   
-        return await prisma.products.update({
+        await prisma.products.update({
           where: {
-            id: Number(id),
+            id: Number(data.id),
           },
           data,
         })  
+
+        response.json({ message: `Product with id: ${data.id} updated`})
 
     } catch (error) {
 
@@ -73,15 +78,19 @@ export default class ProductsController {
     }
   }
 
-  static async delete (id: string) {
+   async delete (request: Request, response: Response) {
+
+    const data: ProductsInterface = request.body.id
 
     try {
 
       await prisma.products.delete({
         where: {
-          id: Number(id),
+          id: Number(data.id),
         },
       })
+
+      return response.json({ message: `Product with id: ${data.id} deleted`})
 
     } catch (error) {
 
