@@ -8,7 +8,7 @@ import { LogService } from '../../services/log.service'
 const prisma = new PrismaClient()
 export default class UsersController {
 
-   async findAll (request: Request, response: Response) {
+   async findAll () {
 
     try {     
 
