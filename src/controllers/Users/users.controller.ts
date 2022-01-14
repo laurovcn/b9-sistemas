@@ -21,7 +21,7 @@ export default class UsersController {
 
       await LogService(data)
 
-      return await error
+      return error
     }
   }
 
@@ -39,6 +39,12 @@ export default class UsersController {
       })  
 
     } catch (error) {  
+
+      const data = {
+        description: 'Cannot create users'
+      } as LogInterface
+
+      await LogService(data)
 
      return error
   }  
@@ -61,6 +67,12 @@ export default class UsersController {
 
     } catch (error) {
 
+      const data = {
+        description: 'Cannot update users'
+      } as LogInterface
+
+      await LogService(data)
+
       return error
     }
   }
@@ -76,6 +88,12 @@ export default class UsersController {
       })
 
     } catch (error) {
+
+      const data = {
+        description: 'Cannot delete users'
+      } as LogInterface
+
+      await LogService(data)
 
       return error
     }

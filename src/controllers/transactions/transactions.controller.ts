@@ -1,5 +1,7 @@
 import { PrismaClient } from '@prisma/client'
+import LogInterface from '../../interfaces/log/log.interface'
 import TransactionsInterface from '../../interfaces/transactions/transactions'
+import { LogService } from '../../mongodb/mongo.service'
 
 const prisma = new PrismaClient()
 
@@ -12,6 +14,12 @@ export default class TransactionsController {
       return await prisma.transactions.findMany()
 
     } catch (error) {
+
+      const data = {
+        description: 'Cannot find transactions'
+      } as LogInterface
+
+      await LogService(data)
 
       return error
     }
@@ -47,6 +55,13 @@ export default class TransactionsController {
       return JSON.stringify({message: 'Not Product Found'})
 
      } catch (error) {  
+
+
+      const data = {
+        description: 'Cannot create transactions'
+      } as LogInterface
+
+      await LogService(data)
 
      return error
     }  

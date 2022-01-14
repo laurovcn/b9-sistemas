@@ -1,5 +1,7 @@
 import { PrismaClient } from '@prisma/client'
+import LogInterface from '../../interfaces/log/log.interface'
 import ProductsInterface from '../../interfaces/products/products.interface'
+import { LogService } from '../../mongodb/mongo.service'
 
 const prisma = new PrismaClient()
 
@@ -12,6 +14,13 @@ export default class ProductsController {
       return await prisma.products.findMany()
 
     } catch (error) {
+
+
+      const data = {
+        description: 'Cannot find products'
+      } as LogInterface
+
+      await LogService(data)
 
       return error
     }
@@ -27,7 +36,13 @@ export default class ProductsController {
         data
       })  
 
-    } catch (error) {  
+    } catch (error) { 
+
+      const data = {
+        description: 'Cannot create products'
+      } as LogInterface
+
+      await LogService(data) 
 
      return error
   }  
@@ -48,6 +63,12 @@ export default class ProductsController {
 
     } catch (error) {
 
+      const data = {
+        description: 'Cannot update products'
+      } as LogInterface
+
+      await LogService(data)
+
       return error
     }
   }
@@ -63,6 +84,12 @@ export default class ProductsController {
       })
 
     } catch (error) {
+
+      const data = {
+        description: 'Cannot delete products'
+      } as LogInterface
+
+      await LogService(data)
 
       return error
     }
