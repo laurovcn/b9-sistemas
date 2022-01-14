@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import { Request, Response } from 'express'
 import LogInterface from '../../interfaces/log/log.interface'
 import TransactionsInterface from '../../interfaces/transactions/transactions'
 import { LogService } from '../../services/log.service'
@@ -7,7 +8,7 @@ const prisma = new PrismaClient()
 
 export default class TransactionsController {
 
-  static async findAll () {
+   async findAll () {
 
     try {
 
@@ -25,11 +26,11 @@ export default class TransactionsController {
     }
   }
 
-  static async create (req: TransactionsInterface) {     
+   async create (request: Request, response: Response) {     
     
     try {  
 
-      const data: TransactionsInterface  = req
+      const data: TransactionsInterface  = request.body
         
       const id = data.productsId
       
@@ -48,14 +49,13 @@ export default class TransactionsController {
           data: { quantity: check.quantity - 1 }
         }) 
 
-      return data
+      return response.json({ message: `Transaction Complete ${data} `})
 
       } 
 
-      return JSON.stringify({message: 'Not Product Found'})
+      return response.json({message: 'Not Product Found'})
 
      } catch (error) {  
-
 
       const data = {
         description: 'Cannot create transactions'
