@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import { Request, Response } from 'express'
 import ClientsInterface from '../../interfaces/clients/clients.interface'
 import LogInterface from '../../interfaces/log/log.interface'
 import { LogService } from '../../services/log.service'
@@ -7,7 +8,7 @@ const prisma = new PrismaClient()
 
 export default class ClientsController {
 
-  static async findAll () {
+   async findAll () {
 
     try {
 
@@ -25,15 +26,17 @@ export default class ClientsController {
     }
   }
 
-  static async create (req: ClientsInterface) { 
+   async create (request: Request, response: Response) { 
 
-    const data = req
+    const data: ClientsInterface = request.body
     
     try {  
       
-      return await prisma.clients.create({
+      await prisma.clients.create({
         data
       })  
+
+      response.json({ message: `Client ${data} created` })
 
     } catch (error) {  
 
@@ -47,18 +50,21 @@ export default class ClientsController {
   }  
 }
 
-  static async update (id: string, request: ClientsInterface) {
+   async update (request: Request, response: Response) {
 
     try {
         
-        const data = request 
+        const id: string = request.params.id
+        const data: ClientsInterface = request.body 
   
-        return await prisma.clients.update({
+        await prisma.clients.update({
           where: {
             id: Number(id),
           },
           data,
         })  
+
+        return response.json({ message: `Client with id: ${data.id} updated`})
 
     } catch (error) {
 
@@ -72,7 +78,9 @@ export default class ClientsController {
     }
   }
 
-  static async delete (id: string) {
+   async delete (request: Request, response: Response) {
+
+    const id: string = request.params.id
 
     try {
 
@@ -81,6 +89,8 @@ export default class ClientsController {
           id: Number(id),
         },
       })
+
+      return response.json({ message: `Client with with id: ${id} deleted` })
 
     } catch (error) {
 

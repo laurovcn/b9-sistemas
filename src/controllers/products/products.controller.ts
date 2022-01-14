@@ -16,7 +16,6 @@ export default class ProductsController {
 
     } catch (error) {
 
-
       const data = {
         description: 'Cannot find products'
       } as LogInterface
@@ -55,16 +54,17 @@ export default class ProductsController {
 
     try {
         
+        const id: string = request.params.id
         const data: ProductsInterface = request.body 
   
         await prisma.products.update({
           where: {
-            id: Number(data.id),
+            id: Number(id),
           },
           data,
         })  
 
-        response.json({ message: `Product with id: ${data.id} updated`})
+        response.json({ message: `Product with id: ${id} updated`})
 
     } catch (error) {
 
@@ -80,17 +80,17 @@ export default class ProductsController {
 
    async delete (request: Request, response: Response) {
 
-    const data: ProductsInterface = request.body.id
+    const id: string = request.params.id
 
     try {
 
       await prisma.products.delete({
         where: {
-          id: Number(data.id),
+          id: Number(id),
         },
       })
 
-      return response.json({ message: `Product with id: ${data.id} deleted`})
+      return response.json({ message: `Product with id: ${id} deleted`})
 
     } catch (error) {
 

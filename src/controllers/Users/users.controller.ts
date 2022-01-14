@@ -57,18 +57,19 @@ export default class UsersController {
 
     try {
         
+        const id: string = request.params.id
         const data: UsersInterface = request.body
 
         data.password = await bcrypt.hash(data.password, 10)
   
         await prisma.users.update({
           where: {
-            id: Number(data.id),
+            id: Number(id),
           },
           data,
         })  
 
-      return response.json({Message: `Update user with id: ${data.id}`})
+      return response.json({Message: `Update user with id: ${id}`})
 
     } catch (error) {
 
@@ -84,17 +85,17 @@ export default class UsersController {
 
    async delete (request: Request, response: Response) {
 
-    const data: UsersInterface = request.body.id
+    const id: string = request.params.id
 
     try {
 
       await prisma.users.delete({
         where: {
-          id: Number(data.id),
+          id: Number(id),
         },
       })
 
-     return response.json({Message: `User with id: ${data.id} deleted`})
+     return response.json({Message: `User with id: ${id} deleted`})
 
     } catch (error) {
 
