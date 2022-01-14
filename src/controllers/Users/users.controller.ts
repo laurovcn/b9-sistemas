@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcrypt'
-import LogInterface from '../../interfaces/log/log.interface';
-import UsersInterface from '../../interfaces/users/users.interface';
+import LogInterface from '../../interfaces/log/log.interface'
+import UsersInterface from '../../interfaces/users/users.interface'
 import { LogService } from '../../mongodb/mongo.service'
 
 const prisma = new PrismaClient()
@@ -32,7 +32,7 @@ export default class UsersController {
     
     try {  
 
-      data.password = await bcrypt.hash(req.password, 10);
+      data.password = await bcrypt.hash(req.password, 10)
       
       return await prisma.users.create({
         data
@@ -50,7 +50,7 @@ export default class UsersController {
         
         const data = request
 
-        data.password = await bcrypt.hash(request.password, 10);
+        data.password = await bcrypt.hash(request.password, 10)
   
         return await prisma.users.update({
           where: {
