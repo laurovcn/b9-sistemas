@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import LogInterface from '../../interfaces/log/log.interface'
 import TransactionsInterface from '../../interfaces/transactions/transactions'
-import { LogService } from '../../mongodb/mongo.service'
+import { LogService } from '../../services/log.service'
 
 const prisma = new PrismaClient()
 

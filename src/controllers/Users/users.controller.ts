@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcrypt'
 import LogInterface from '../../interfaces/log/log.interface'
 import UsersInterface from '../../interfaces/users/users.interface'
-import { LogService } from '../../mongodb/mongo.service'
+import { LogService } from '../../services/log.service'
 
 const prisma = new PrismaClient()
 export default class UsersController {

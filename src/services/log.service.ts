@@ -21,8 +21,6 @@ export async function LogService (data: LogInterface ) {
   
   await collections.b9system?.insertOne(data).then(async ()=> {
     return await client.close();
-  })
-
-  
+  })  
 }
 
