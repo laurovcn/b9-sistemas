@@ -7,11 +7,11 @@ import { LogService } from '../../services/log.service'
 
    const prisma = new PrismaClient()
 
-   export const findAll = async (request: Request, response: Response) => {
+   export const findAll = (request: Request, response: Response) => {
 
     try {     
 
-      return response.json(await prisma.users.findMany())
+      return response.json(prisma.users.findMany())
 
     } catch (error) {    
       
@@ -19,7 +19,7 @@ import { LogService } from '../../services/log.service'
         description: 'Cannot find users'
       } as LogInterface
 
-      await LogService(data)
+      LogService(data)
 
       return error
     }

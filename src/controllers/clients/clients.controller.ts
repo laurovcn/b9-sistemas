@@ -1,16 +1,16 @@
 import { PrismaClient } from '@prisma/client'
-import { Request, Response } from 'express'
+import { Request, response, Response } from 'express'
 import ClientsInterface from '../../interfaces/clients/clients.interface'
 import LogInterface from '../../interfaces/log/log.interface'
 import { LogService } from '../../services/log.service'
 
   const prisma = new PrismaClient()
 
-  export const findAll = async () => {
+  export const findAll = () => {
 
   try {
 
-    return await prisma.clients.findMany()
+    return response.json(prisma.clients.findMany()) 
 
   } catch (error) {
 
@@ -18,7 +18,7 @@ import { LogService } from '../../services/log.service'
       description: 'Cannot find clients'
     } as LogInterface
 
-    await LogService(data)
+    LogService(data)
 
     return error
   }
