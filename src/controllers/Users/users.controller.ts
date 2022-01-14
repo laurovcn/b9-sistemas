@@ -9,17 +9,17 @@ export default class UsersController {
 
   static async findAll () {
 
-    try {
+    try {     
 
+      return await prisma.users.findMany()
+
+    } catch (error) {    
+      
       const data = {
         description: 'Cannot find users'
       } as LogInterface
 
-      await LogService.logCreate(data)
-
-      return await prisma.users.findMany()
-
-    } catch (error) {     
+      await LogService(data)
 
       return await error
     }

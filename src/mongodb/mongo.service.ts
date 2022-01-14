@@ -4,7 +4,7 @@ import LogInterface from '../interfaces/log/log.interface';
 
 export const collections: { b9system?: mongoDB.Collection }  = {}  
 
-export async function connectToDatabase () {
+export async function LogService (data: LogInterface ) {
   dotenv.config();
 
   const client: mongoDB.MongoClient = new mongoDB.MongoClient(process.env.DB_CONN_STRING || '');
@@ -19,17 +19,10 @@ export async function connectToDatabase () {
      
   console.log(`Successfully connected to database: ${db.databaseName} and collection: ${b9systemCollection.collectionName}`);
   
-  await client.close();
+  await collections.b9system?.insertOne(data).then(async ()=> {
+    return await client.close();
+  })
+
+  
 }
-
-  export class LogService {
-
-    static async logCreate (data: LogInterface) { 
-      console.log(data) 
-      await connectToDatabase ().then( async () => {
-      const result =  await collections.b9system?.insertOne(data)
-      console.log(result)
-      })       
-    }
-  }
 
