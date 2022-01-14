@@ -5,14 +5,13 @@ import LogInterface from '../../interfaces/log/log.interface'
 import UsersInterface from '../../interfaces/users/users.interface'
 import { LogService } from '../../services/log.service'
 
-const prisma = new PrismaClient()
-export default class UsersController {
+   const prisma = new PrismaClient()
 
-   async findAll () {
+   export const findAll = async (request: Request, response: Response) => {
 
     try {     
 
-      return await prisma.users.findMany()
+      return response.json(await prisma.users.findMany())
 
     } catch (error) {    
       
@@ -26,8 +25,7 @@ export default class UsersController {
     }
   }
 
-
-   async create (request: Request, response: Response) { 
+  export const create = async (request: Request, response: Response) => { 
 
     const data: UsersInterface = request.body
     
@@ -39,7 +37,7 @@ export default class UsersController {
         data
       })  
 
-      return response.json({Message: `Created user ${data}`})
+      return response.json({Message: 'Created user'})
 
     } catch (error) {  
 
@@ -53,7 +51,7 @@ export default class UsersController {
   }  
 }
 
-   async update (request: Request, response: Response) {
+   export const update = async (request: Request, response: Response) => {
 
     try {
         
@@ -83,7 +81,7 @@ export default class UsersController {
     }
   }
 
-   async delete (request: Request, response: Response) {
+   export const remove = async (request: Request, response: Response) => {
 
     const id: string = request.params.id
 
@@ -108,4 +106,3 @@ export default class UsersController {
       return error
     }
   }
-}
