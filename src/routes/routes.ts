@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import AuthCheck  from '../auth/auth.check'
-import AuthGuard from '../auth/auth.guard'
+import * as authCheck  from '../auth/auth.check'
+import * as authGuard from '../auth/auth.guard'
 import { clientsRouter } from './clients/clients.routes'
 import { productsRouter } from './products/products.routes'
 import { usersRouter }from './users/users.routes'
@@ -12,14 +12,14 @@ export const router = express.Router()
 
 app.use(express.json())
 
-router.get('/', async (req: Request, res: Response) => {
-  res.json('Welcome to B9 System Project')
+router.get('/', async (request: Request, response: Response) => {
+  response.json('Welcome to B9 System Project')
 })
 
-router.post('/login', AuthGuard.login)
+router.post('/login', authGuard.login)
 
-router.use('/products', AuthCheck.auth, productsRouter)
-router.use('/clients', AuthCheck.auth, clientsRouter)
-router.use('/users', AuthCheck.auth, usersRouter)
-router.use('/transactions', AuthCheck.auth, transactionsRouter)
+router.use('/products', authCheck.auth, productsRouter)
+router.use('/clients', authCheck.auth, clientsRouter)
+router.use('/users', authCheck.auth, usersRouter)
+router.use('/transactions', authCheck.auth, transactionsRouter)
 

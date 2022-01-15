@@ -4,10 +4,8 @@ import bcrypt from 'bcrypt'
 import createError from 'http-errors'
 import UsersInterface from '../interfaces/users/users.interface';
 import { signAccessToken }from './jwt'
-
-export default class AuthService {
   
-  static async register(data: UsersInterface) {
+  export const register = async (data: UsersInterface) => {
         data.password = bcrypt.hashSync(data.password, 10);
         let user = prisma.users.create({
             data
@@ -17,7 +15,7 @@ export default class AuthService {
         return data;
     }
 
-    static async login(data: UsersInterface) {
+    export const login = async (data: UsersInterface) => {
       const { email, password } = data;
       const users = await prisma.users.findUnique({
           where: {
@@ -33,4 +31,4 @@ export default class AuthService {
       const accessToken = await signAccessToken(users)
       return { ...users, accessToken }
   }
-}
+

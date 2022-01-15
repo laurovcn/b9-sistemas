@@ -1,15 +1,15 @@
 import express from 'express'
-import * as UsersController from '../../controllers/Users/users.controller'
+import * as usersController from '../../controllers/Users/users.controller'
 
 export const usersRouter = express.Router()
 
 usersRouter.use(express.json())
 
-usersRouter.get('/', UsersController.findAll)
+usersRouter.get('/', usersController.findAll)
 
-usersRouter.post('/', UsersController.create)
+usersRouter.post('/', usersController.create)
 
-usersRouter.put('/:id', UsersController.update)
+usersRouter.put('/:id', usersController.update)
 
-usersRouter.delete('/:id', UsersController.remove)
+usersRouter.delete('/:id', usersController.remove)
 

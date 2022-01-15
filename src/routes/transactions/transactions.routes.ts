@@ -1,10 +1,10 @@
 import express from 'express'
-import * as TransactionsController from '../../controllers/transactions/transactions.controller'
+import * as transactionsController from '../../controllers/transactions/transactions.controller'
 
 export const transactionsRouter = express.Router()
 
 transactionsRouter.use(express.json())
 
-transactionsRouter.get('/', TransactionsController.findAll)
+transactionsRouter.get('/', transactionsController.findAll)
 
-transactionsRouter.post('/', TransactionsController.create)
+transactionsRouter.post('/', transactionsController.create)

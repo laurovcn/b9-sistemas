@@ -1,14 +1,14 @@
 import express from 'express'
-import  * as ClientsController from '../../controllers/clients/clients.controller'
+import  * as clientsController from '../../controllers/clients/clients.controller'
 
 export const clientsRouter = express.Router()
 
 clientsRouter.use(express.json())
 
-clientsRouter.get('/', ClientsController.findAll)
+clientsRouter.get('/', clientsController.findAll)
 
-clientsRouter.post('/', ClientsController.create)
+clientsRouter.post('/', clientsController.create)
 
-clientsRouter.put('/:id', ClientsController.update)
+clientsRouter.put('/:id', clientsController.update)
 
-clientsRouter.delete('/:id', ClientsController.remove)
+clientsRouter.delete('/:id', clientsController.remove)
