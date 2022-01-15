@@ -10,7 +10,12 @@ const prisma = new PrismaClient()
 
     try {
 
-      return response.json(await prisma.transactions.findMany()) 
+      return response.json(await prisma.transactions.findMany(
+        {
+          skip: 0,
+          take: 10,
+        }
+      )) 
 
     } catch (error) {
 

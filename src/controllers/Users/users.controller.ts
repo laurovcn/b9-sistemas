@@ -11,7 +11,10 @@ import { logService } from '../../services/log.service'
 
     try {             
 
-      return response.json(await prisma.users.findMany())
+      return response.json(await prisma.users.findMany({
+        skip: 0,
+        take: 10,
+      }))
 
     } catch (error) {    
       
