@@ -24,28 +24,26 @@ import { logService } from '../../services/log.service'
     }
 }
 
-  export const create = async (request: Request, response: Response) => { 
+export const create = async (request: Request, response: Response) => { 
 
-    const data: ProductsInterface = request.body
-    
-    try {  
-      
-        await prisma.products.create({
-        data
-      })  
+  const data: ProductsInterface = request.body
+  
+  try {       
 
-      return response.json({ message: 'Product register' })
+    return response.json(await prisma.products.create({
+      data
+    }) )
 
-    } catch (error) { 
+  } catch (error) {  
 
-      const data = {
-        description: 'Cannot create products'
-      } as LogInterface
+    const data = {
+      description: 'Cannot create products'
+    } as LogInterface
 
-      await logService(data) 
+    await logService(data)
 
-      return error
-  }  
+    return error
+}  
 }
 
   export const update = async (request: Request, response: Response) => {
@@ -53,16 +51,14 @@ import { logService } from '../../services/log.service'
     try {
         
         const id: string = request.params.id
-        const data: ProductsInterface = request.body 
+        const data: ProductsInterface = request.body          
 
-        await prisma.products.update({
+        return response.json(await prisma.products.update({
           where: {
             id: Number(id),
           },
           data,
-        })  
-
-        response.json({ message: `Product with id: ${id} updated`})
+        }) )
 
     } catch (error) {
 
@@ -80,15 +76,13 @@ import { logService } from '../../services/log.service'
 
     const id: string = request.params.id
 
-    try {
+    try {     
 
-      await prisma.products.delete({
+      return response.json(await prisma.products.delete({
         where: {
           id: Number(id),
         },
-      })
-
-      return response.json({ message: `Product with id: ${id} deleted`})
+      }))
 
     } catch (error) {
 

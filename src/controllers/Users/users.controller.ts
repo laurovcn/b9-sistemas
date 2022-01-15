@@ -7,13 +7,9 @@ import { logService } from '../../services/log.service'
 
    const prisma = new PrismaClient()
 
-   export const findAll = async (request: Request, response: Response) => {
+   export const findAll = async (request: Request, response: Response) => {    
 
-    console.log('1')
-
-    try {   
-      
-      console.log('2')
+    try {             
 
       return response.json(await prisma.users.findMany())
 
@@ -36,12 +32,10 @@ import { logService } from '../../services/log.service'
     try {  
 
       data.password = await bcrypt.hash(data.password, 10)
-      
-      await prisma.users.create({
+              
+      return response.json(await prisma.users.create({
         data
-      })  
-
-      return response.json({message: 'Created user'})
+      }))
 
     } catch (error) {  
 
@@ -63,15 +57,13 @@ import { logService } from '../../services/log.service'
         const data: UsersInterface = request.body
 
         data.password = await bcrypt.hash(data.password, 10)
-  
-        await prisma.users.update({
-          where: {
-            id: Number(id),
-          },
-          data,
-        })  
-
-      return response.json({Message: `Update user with id: ${id}`})
+           
+      return response.json(await prisma.users.update({
+        where: {
+          id: Number(id),
+        },
+        data,
+      }) )
 
     } catch (error) {
 
@@ -90,14 +82,12 @@ import { logService } from '../../services/log.service'
     const id: string = request.params.id
 
     try {
-
-      await prisma.users.delete({
+     
+      return response.json( await prisma.users.delete({
         where: {
           id: Number(id),
         },
-      })
-
-      return response.json({Message: `User with id: ${id} deleted`})
+      }))
 
     } catch (error) {
 

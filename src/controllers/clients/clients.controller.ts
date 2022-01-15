@@ -28,13 +28,11 @@ import { logService } from '../../services/log.service'
 
     const data: ClientsInterface = request.body
     
-    try {  
-      
-      await prisma.clients.create({
-        data
-      })  
+    try {              
 
-      return response.json({ message: `Client created` })
+      return response.json(await prisma.clients.create({
+        data
+      }))
 
     } catch (error) {  
 
@@ -54,15 +52,13 @@ import { logService } from '../../services/log.service'
         
         const id: string = request.params.id
         const data: ClientsInterface = request.body 
-
-        await prisma.clients.update({
+          
+        return response.json(await prisma.clients.update({
           where: {
             id: Number(id),
           },
           data,
-        })  
-
-        return response.json({ message: `Client with id: ${data.id} updated`})
+        }))
 
     } catch (error) {
 
@@ -80,15 +76,13 @@ import { logService } from '../../services/log.service'
 
     const id: string = request.params.id
 
-    try {
+    try {      
 
-      await prisma.clients.delete({
+      return response.json(await prisma.clients.delete({
         where: {
           id: Number(id),
         },
-      })
-
-      return response.json({ message: `Client with with id: ${id} deleted` })
+      }))
 
     } catch (error) {
 
