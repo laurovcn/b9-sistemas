@@ -11,7 +11,7 @@ const prisma = new PrismaClient()
     try {
 
       const currentPage: any = request.query.page || 1;
-      const take: number = 10;
+      const take: any = request.query.limit || 10;
       const skip = (currentPage - 1) * take;
 
       return response.json(await prisma.transactions.findMany(

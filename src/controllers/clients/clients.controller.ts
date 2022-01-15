@@ -11,7 +11,7 @@ import { logService } from '../../services/log.service'
     try {
 
       const currentPage: any = request.query.page || 1;
-      const take: number = 10;
+      const take: any = request.query.limit || 10;
       const skip = (currentPage - 1) * take;
 
       return response.json(await prisma.clients.findMany(
