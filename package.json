@@ -4,7 +4,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/app.ts",
-    "build": "npx tsc && npx sucrase-node dist/src/app.js --transforms typescript, imports"
+    "build": "npx tsc && npx sucrase-node dist/src/app.js --transforms typescript, imports",
+    "database": "docker-compose up -d",
+    "seed": "npx prisma db seed"
   },
   "dependencies": {
     "@prisma/client": "3.7.0",
