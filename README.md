@@ -5,7 +5,7 @@
 Clone this repository:
 
 ```
-git clone git@github.com:prisma/prisma-examples.git --depth=1
+git clone https://github.com/lvneto/b9-sistemas
 ```
 
 ### 1. Download example and install dependencies
@@ -27,7 +27,6 @@ Now, seed the database with the sample data in [`prisma/seed.ts`](./prisma/seed.
 ```
 npx prisma db seed
 ```
-
 
 ### 3. Start the REST API server
 
