@@ -14,17 +14,17 @@ model Users {
 }
 
 model Clients {
-  id           Int            @id @default(autoincrement())
-  email        String
+  id           Int   @id @default(autoincrement())
+  email        String @unique
   name         String
   products     Products[]
   transactions Transactions[]
 }
 
 model Products {
-  id           Int            @id @default(autoincrement())
+  id           Int   @id @default(autoincrement())
   title        String
-  quantity     Int            @default(100)
+  quantity     Int   @default(100)
   clients      Clients[]
   transactions Transactions[]
 }
