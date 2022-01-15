@@ -7,9 +7,13 @@ import { logService } from '../../services/log.service'
 
    const prisma = new PrismaClient()
 
-   export const findAll = async (response: Response) => {
+   export const findAll = async (request: Request, response: Response) => {
 
-    try {     
+    console.log('1')
+
+    try {   
+      
+      console.log('2')
 
       return response.json(await prisma.users.findMany())
 
@@ -37,7 +41,7 @@ import { logService } from '../../services/log.service'
         data
       })  
 
-      return response.json({Message: 'Created user'})
+      return response.json({message: 'Created user'})
 
     } catch (error) {  
 

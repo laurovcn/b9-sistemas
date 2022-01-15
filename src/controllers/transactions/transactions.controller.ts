@@ -6,7 +6,7 @@ import { logService } from '../../services/log.service'
 
 const prisma = new PrismaClient()
 
-  export const findAll = async (response: Response) => {
+  export const findAll = async (request: Request, response: Response) => {
 
     try {
 
