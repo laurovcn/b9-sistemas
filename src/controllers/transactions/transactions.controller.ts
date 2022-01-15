@@ -6,7 +6,7 @@ import { LogService } from '../../services/log.service'
 
 const prisma = new PrismaClient()
 
-  export const findAll = async (request: Request, response: Response) => {
+  export const findAll = async (response: Response) => {
 
     try {
 
@@ -38,7 +38,7 @@ const prisma = new PrismaClient()
 
       if (check && check.quantity !== 0) {
 
-         await prisma.transactions.createMany({
+          await prisma.transactions.createMany({
           data
         })
 
@@ -53,7 +53,7 @@ const prisma = new PrismaClient()
 
       return response.json({message: 'Not Product Found'})
 
-     } catch (error) {  
+      } catch (error) {  
 
       const data = {
         description: 'Cannot create transactions'
@@ -61,6 +61,6 @@ const prisma = new PrismaClient()
 
       await LogService(data)
 
-     return error
+      return error
     }  
-  }
+}

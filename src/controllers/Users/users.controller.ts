@@ -7,7 +7,7 @@ import { LogService } from '../../services/log.service'
 
    const prisma = new PrismaClient()
 
-   export const findAll = async (request: Request, response: Response) => {
+   export const findAll = async (response: Response) => {
 
     try {     
 
@@ -51,7 +51,7 @@ import { LogService } from '../../services/log.service'
   }  
 }
 
-   export const update = async (request: Request, response: Response) => {
+  export const update = async (request: Request, response: Response) => {
 
     try {
         
@@ -93,7 +93,7 @@ import { LogService } from '../../services/log.service'
         },
       })
 
-     return response.json({Message: `User with id: ${id} deleted`})
+      return response.json({Message: `User with id: ${id} deleted`})
 
     } catch (error) {
 
