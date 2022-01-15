@@ -10,10 +10,14 @@ const prisma = new PrismaClient()
 
     try {
 
+      const currentPage: any = request.query.page || 1;
+      const take: number = 10;
+      const skip = (currentPage - 1) * take;
+
       return response.json(await prisma.transactions.findMany(
         {
-          skip: 0,
-          take: 10,
+          skip,
+          take
         }
       )) 
 
