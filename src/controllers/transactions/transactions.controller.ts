@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client'
 import { Request, Response } from 'express'
 import LogInterface from '../../interfaces/log/log.interface'
 import TransactionsInterface from '../../interfaces/transactions/transactions'
-import { LogService } from '../../services/log.service'
+import { logService } from '../../services/log.service'
 
 const prisma = new PrismaClient()
 
@@ -18,7 +18,7 @@ const prisma = new PrismaClient()
         description: 'Cannot find transactions'
       } as LogInterface
 
-      await LogService(data)
+      await logService(data)
 
       return error
     }
@@ -59,7 +59,7 @@ const prisma = new PrismaClient()
         description: 'Cannot create transactions'
       } as LogInterface
 
-      await LogService(data)
+      await logService(data)
 
       return error
     }  

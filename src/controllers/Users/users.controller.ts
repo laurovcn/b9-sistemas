@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 import { Request, Response } from 'express'
 import LogInterface from '../../interfaces/log/log.interface'
 import UsersInterface from '../../interfaces/users/users.interface'
-import { LogService } from '../../services/log.service'
+import { logService } from '../../services/log.service'
 
    const prisma = new PrismaClient()
 
@@ -19,7 +19,7 @@ import { LogService } from '../../services/log.service'
         description: 'Cannot find users'
       } as LogInterface
 
-      await LogService(data)
+      await logService(data)
 
       return error
     }
@@ -45,7 +45,7 @@ import { LogService } from '../../services/log.service'
         description: 'Cannot create users'
       } as LogInterface
 
-      await LogService(data)
+      await logService(data)
 
      return error
   }  
@@ -75,7 +75,7 @@ import { LogService } from '../../services/log.service'
         description: 'Cannot update users'
       } as LogInterface
 
-      await LogService(data)
+      await logService(data)
 
       return error
     }
@@ -101,7 +101,7 @@ import { LogService } from '../../services/log.service'
         description: 'Cannot delete users'
       } as LogInterface
 
-      await LogService(data)
+      await logService(data)
 
       return error
     }

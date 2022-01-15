@@ -4,7 +4,7 @@ import LogInterface from '../interfaces/log/log.interface';
 
 export const collections: { b9system?: mongoDB.Collection }  = {}  
 
-export async function LogService (data: LogInterface ) {
+export const logService = async (data: LogInterface ) => {
   dotenv.config();
 
   const client: mongoDB.MongoClient = new mongoDB.MongoClient(process.env.DB_CONN_STRING || '');

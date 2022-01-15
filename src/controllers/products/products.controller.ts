@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client'
 import { Request, Response } from 'express'
 import LogInterface from '../../interfaces/log/log.interface'
 import ProductsInterface from '../../interfaces/products/products.interface'
-import { LogService } from '../../services/log.service'
+import { logService } from '../../services/log.service'
 
   const prisma = new PrismaClient()
 
@@ -18,7 +18,7 @@ import { LogService } from '../../services/log.service'
         description: 'Cannot find products'
       } as LogInterface
 
-      await LogService(data)
+      await logService(data)
 
       return error
     }
@@ -42,7 +42,7 @@ import { LogService } from '../../services/log.service'
         description: 'Cannot create products'
       } as LogInterface
 
-      await LogService(data) 
+      await logService(data) 
 
       return error
   }  
@@ -70,7 +70,7 @@ import { LogService } from '../../services/log.service'
         description: 'Cannot update products'
       } as LogInterface
 
-      await LogService(data)
+      await logService(data)
 
       return error
     }
@@ -96,7 +96,7 @@ import { LogService } from '../../services/log.service'
         description: 'Cannot delete products'
       } as LogInterface
 
-      await LogService(data)
+      await logService(data)
 
       return error
     }
