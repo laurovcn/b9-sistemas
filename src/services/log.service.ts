@@ -10,7 +10,7 @@ export const logService = async (data: LogInterface ) => {
   const client: mongoDB.MongoClient = new mongoDB.MongoClient(process.env.DB_CONN_STRING || '');
           
   await client.connect();
-      
+
   const db: mongoDB.Db = client.db(process.env.DB_NAME || '');
  
   const b9systemCollection: mongoDB.Collection = db.collection(process.env.B9SYSTEM_COLLECTION_NAME || '');
@@ -21,6 +21,6 @@ export const logService = async (data: LogInterface ) => {
   
   await collections.b9system?.insertOne(data).then(async ()=> {
     return await client.close();
-  })  
-}
+  })   
 
+}
