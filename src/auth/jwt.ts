@@ -4,7 +4,7 @@ import createError from 'http-errors'
 const accessTokenSecret = "ysecrestr"
 const tokenExpiration = '1h'
 
-export function signAccessToken(payload: any){
+export const signAccessToken = (payload: any) => {
     return new Promise((resolve, reject) => {
         jwt.sign({ payload, expiresIn: tokenExpiration }, accessTokenSecret, {
         }, (err, token) => {
@@ -15,7 +15,7 @@ export function signAccessToken(payload: any){
         })
     })
 }
-export function verifyAccessToken(token: string){
+export const verifyAccessToken = (token: string) => {
     return new Promise((resolve, reject) => {
         jwt.verify(token, accessTokenSecret, (err, payload) => {
             if (err) {
