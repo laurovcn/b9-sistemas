@@ -1,10 +1,24 @@
-postgres:
-  image: postgres
-  ports:
-    - "5432:5432"
-  container_name: postgres-b9system
+version: '3.1'
 
-  environment:
-    POSTGRES_DB: postgres
-    POSTGRES_PASSWORD: dev
-    POSTGRES_USER: postgres
+services:
+
+  mongo:
+    image: mongo
+    restart: always
+    container_name: mongo-b9system
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: b9system
+      MONGO_INITDB_ROOT_PASSWORD: b9system
+
+  postgres:
+    image: postgres
+    restart: always
+    container_name: postgres-b9system
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: dev
+      POSTGRES_USER: postgres
