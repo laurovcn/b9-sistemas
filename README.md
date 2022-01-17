@@ -31,7 +31,7 @@ npx prisma db seed
 ### 3. Start the REST API server
 
 ```
-npm run dev
+npm run build && npm run start
 ```
 
 The server is now running on `http://localhost:3001`
