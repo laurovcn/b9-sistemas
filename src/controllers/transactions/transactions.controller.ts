@@ -29,7 +29,7 @@ const prisma = new PrismaClient()
 
       await logService(data)
 
-      return error
+      return response.json(error)
     }
   }
 
@@ -70,6 +70,6 @@ const prisma = new PrismaClient()
 
       await logService(data)
 
-      return error
+      return response.json(error)
     }  
 }

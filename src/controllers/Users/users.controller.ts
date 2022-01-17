@@ -28,7 +28,7 @@ import { logService } from '../../services/log.service'
 
       await logService(data)
 
-      return error
+      return response.json(error)
     }
   }
 
@@ -52,7 +52,7 @@ import { logService } from '../../services/log.service'
 
       await logService(data)
 
-     return error
+     return response.json(error)
   }  
 }
 
@@ -80,7 +80,7 @@ import { logService } from '../../services/log.service'
 
       await logService(data)
 
-      return error
+      return response.json(error)
     }
   }
 
@@ -104,6 +104,6 @@ import { logService } from '../../services/log.service'
 
       await logService(data)
 
-      return error
+      return response.json(error)
     }
   }
